@@ -19,22 +19,19 @@ class SearchPage extends Component {
 
 
     onChange = e => {
-            this.non_search_in_a_second()
-            this.setState(
-                {[e.target.name]: e.target.value}
-            )
-            this.set_search_in_a_second()
+        this.non_search_in_a_second()
+        this.setState(
+            {[e.target.name]: e.target.value}
+        )
+        this.set_search_in_a_second()
     }
 
     timer() {
-        console.log("alo")
         if (this.state.bookName !== "") {
-            console.log(this.state.bookName)
             this.setState({
                 intervalID: this.props.getBooks(this.state.bookName)
             })
         } else {
-            console.log(this.state.bookName)
             this.props.clear_book_list()
         }
         if (this.props.requestGet) {
@@ -44,16 +41,16 @@ class SearchPage extends Component {
     }
 
     set_search_in_a_second() {
-        this.intervalId = setInterval(this.timer.bind(this), 1000);
+        this.intervalId = setTimeout(this.timer.bind(this), 1000);
     }
 
     non_search_in_a_second() {
-        clearInterval(this.intervalId);
+        clearTimeout(this.intervalId);
     }
 
     onSubmit = e => {
         e.preventDefault()
-
+        this.props.getBooks(this.state.bookName)
     }
     setModalActivate(data) {
         this.setState((state) => {
@@ -73,17 +70,19 @@ class SearchPage extends Component {
                 <div className={styles.BookList}>
                     {
                         this.props.books.docs?
-                        this.props.books.docs.map((book, i)=>(
-                            <div className={styles.BookContainer} key={i}>
-                                <div className={styles.Book}>
-                                    <div className={styles.Cover}>
-                                        {book.cover_i && book.cover_i !==-1?<img src={`http://covers.openlibrary.org/b/id/${book.cover_i}-S.jpg`}/>:<Fragment></Fragment>}
+                            this.props.books.docs.map((book, i)=>(
+                                <div className={styles.BookContainer} key={i}  >
+                                    <div className={styles.Book}>
+                                        <div className={styles.Cover}>
+                                            {book.cover_i && book.cover_i !==-1?<img src={`http://covers.openlibrary.org/b/id/${book.cover_i}-S.jpg`}/>:<div>обложка <br/>отсутствует</div>}
+                                        </div>
+                                        <div className={styles.Info}>
+                                            <div className={styles.Title}><button  onClick={()=>this.setModalActivate(book)}>{book.author_name}</button></div>
+                                            <div className={styles.Title}>{book.title}</div>
+                                        </div>
                                     </div>
-                                    <div className={styles.Title}>{book.title}</div>
-                                    <button  onClick={()=>this.setModalActivate(book)}>Нажать</button>
                                 </div>
-                            </div>
-                        )): <div></div>
+                            )): <div></div>
                     }
                 </div>
                 <Modal activate={this.state.modelActivate} setModalActivate={this.setModalActivate} data={this.state.data}/>

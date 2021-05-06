@@ -5,34 +5,105 @@
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+  justify-content:space-around;
 }
+
+
 
 .Search{
   width: 100%;
   display: flex;
   justify-content:space-around;
   input{
+    border-radius: 4px;
+    background-color: white;
     width: 80%;
+    //background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    border: 1px solid transparent;
+    height: 40px;
+    font-size: 1.2em;
   }
   button{
     width: 10%;
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    background: #da7f8f;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+  button:hover {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
   }
 }
 
 
 .BookList{
+  padding: 15px 0 15px 0;
   width: 100%;
-  padding: 16px;
+  background: #e1e5ea;
+  border-radius: 15px;
+  height: 80%;
+  overflow: auto;
+
   .BookContainer{
+    height: 100px;
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    padding: 15px;
+
     .Book{
       display: flex;
-
+      height: 100%;
+      .Cover{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size:0.5em;
+      }
+      .Info{
+        padding-left: 15px;
+        button{
+          border: none; outline: none;
+          background-color: transparent;
+          cursor: pointer;
+          padding: 0;
+        }
+        button:hover{
+          color: blue;
+        }
+      }
     }
   }
+  .BookContainer:hover{
+    background: #a7bbc7;
+  }
 }
+
+.BookList::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f9f9fd;
+}
+
+.BookList::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #da7f8f;
+}
+
+.BookList::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  background-color: #f9f9fd;
+}
+
 
 
 .modal{
@@ -73,13 +144,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  .Cover{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size:1em;
+  }
 }
 .Description{
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   .Title{
     text-align: center;
   }
@@ -90,8 +168,8 @@
       overflow: auto;
       display: flex;
       flex-direction: column;
-      text-align: center;
-      align-items: center;
+      //text-align: center;
+      //align-items: center;
     }
   }
 

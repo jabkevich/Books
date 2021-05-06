@@ -8,7 +8,12 @@ const Modal = ({activate, setModalActivate, data})=>{
             <div className={activate?styles.modal + " " +styles.active: styles.modal} onClick={()=>setModalActivate(-1)}>
                 <div className={styles.modal__content} onClick={e => e.stopPropagation()}>
                     <div className={styles.IMG}>
-                        <img src={`http://covers.openlibrary.org/b/id/${data.cover_i}-L.jpg`} height={"auto"} width={"100%"} style={{ "objectFit": "cover"}}/>
+                        <div className={styles.Cover}>
+                            {data.cover_i?
+                                <img src={`http://covers.openlibrary.org/b/id/${data.cover_i}-L.jpg`} height={"auto"} width={"100%"} style={{ "objectFit": "cover"}}/>:<div>
+                                    обложка<br/>отсуттствует
+                                </div>}
+                        </div>
 
                         <div className={styles.Autor}>
                             {data.author_name?<span>{data.author_name[0]}</span>:<span>Отсутствует</span>}
@@ -42,12 +47,12 @@ const Modal = ({activate, setModalActivate, data})=>{
             </div>
         )
     else{
-    return <div></div>
+        return <div></div>
     }
     // else{
 //     return(<div></div>)
 // }
-    }
+}
 
 
 
